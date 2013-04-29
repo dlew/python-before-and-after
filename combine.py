@@ -113,7 +113,10 @@ def combine(words, items, min_word_length=4):
 			for one in forward:
 				for two in backward:
 					# Check that neither title is just the word itself, as that would suck
-					if one["name"].lower() != word and two["name"].lower() != word:
+					#
+					# Also check that they are not equal (this mistake can happen if an item)
+					# starts/ends with the same word
+					if one["name"].lower() != word and two["name"].lower() != word and one != two:
 						pairs.append((word, one, two))
 
 	return pairs
